@@ -1,59 +1,10 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "react-native-wowza-broadcaster@git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-        "scope": null,
-        "escapedName": "react-native-wowza-broadcaster",
-        "name": "react-native-wowza-broadcaster",
-        "rawSpec": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-        "spec": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-        "type": "hosted",
-        "hosted": {
-          "type": "github",
-          "ssh": "git@github.com:medlmichael/react-native-wowza-broadcaster.git",
-          "sshUrl": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-          "httpsUrl": "git+https://github.com/medlmichael/react-native-wowza-broadcaster.git",
-          "gitUrl": "git://github.com/medlmichael/react-native-wowza-broadcaster.git",
-          "shortcut": "github:medlmichael/react-native-wowza-broadcaster",
-          "directUrl": "https://raw.githubusercontent.com/medlmichael/react-native-wowza-broadcaster/master/package.json"
-        }
-      },
-      "/Users/hugonagano/fantapper/friendablelive"
-    ]
-  ],
-  "_from": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-  "_id": "react-native-wowza-broadcaster@1.0.0",
-  "_inCache": true,
-  "_location": "/react-native-wowza-broadcaster",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "react-native-wowza-broadcaster@git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-    "scope": null,
-    "escapedName": "react-native-wowza-broadcaster",
-    "name": "react-native-wowza-broadcaster",
-    "rawSpec": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-    "spec": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:medlmichael/react-native-wowza-broadcaster.git",
-      "sshUrl": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-      "httpsUrl": "git+https://github.com/medlmichael/react-native-wowza-broadcaster.git",
-      "gitUrl": "git://github.com/medlmichael/react-native-wowza-broadcaster.git",
-      "shortcut": "github:medlmichael/react-native-wowza-broadcaster",
-      "directUrl": "https://raw.githubusercontent.com/medlmichael/react-native-wowza-broadcaster/master/package.json"
-    }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder.git"
   },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git#0d637bcf22d06118366437e79c530203353f45d7",
-  "_shasum": "47e3e0a4b13a7980e8f3f198e5f5776d088ee16d",
-  "_shrinkwrap": null,
-  "_spec": "react-native-wowza-broadcaster@git+ssh://git@github.com/medlmichael/react-native-wowza-broadcaster.git",
-  "_where": "/Users/hugonagano/fantapper/friendablelive",
-  "author": "",
+  "homepage": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder",
+  "author": "MEDL Mobile Enterprises",
   "dependencies": {},
   "description": "## Getting started",
   "devDependencies": {},
@@ -61,17 +12,18 @@
   "keywords": [
     "react-native"
   ],
-  "license": "",
+  "license": "MIT",
   "main": "BroadcastView.js",
-  "name": "react-native-wowza-broadcaster",
-  "optionalDependencies": {},
+  "name": "react-native-wowza-gocoder",
   "peerDependencies": {
     "react-native": "^0.4.0"
   },
-  "readme": "\n# react-native-wowza-broadcaster\n\n## Getting started\n\n`$ npm install react-native-wowza-broadcaster --save`\n\n### Mostly automatic installation\n\n`$ react-native link react-native-wowza-broadcaster`\n\n### Manual installation\n\n\n#### iOS\n\n1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`\n2. Go to `node_modules` ➜ `react-native-wowza-broadcaster` and add `RNWowzaBroadcaster.xcodeproj`\n3. In XCode, in the project navigator, select your project. Add `libRNWowzaBroadcaster.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`\n4. Run your project (`Cmd+R`)<\n\n##### Post installation iOS\n1. After obtainting WowzaGoCoderSDK framework and the wowzastaticlib, add them to your main project, in the root directory of the project\n2. Add the libraries to the build phases for your app target, add a copy files phase http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/\n\n#### Android\n\n1. Open up `android/app/src/main/java/[...]/MainActivity.java`\n  - Add `import com.reactlibrary.RNWowzaBroadcasterPackage;` to the imports at the top of the file\n  - Add `new RNWowzaBroadcasterPackage()` to the list returned by the `getPackages()` method\n2. Append the following lines to `android/settings.gradle`:\n  \t```\n  \tinclude ':react-native-wowza-broadcaster'\n  \tproject(':react-native-wowza-broadcaster').projectDir = new File(rootProject.projectDir, \t'../node_modules/react-native-wowza-broadcaster/android')\n  \t```\n3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:\n  \t```\n      compile project(':react-native-wowza-broadcaster')\n  \t```\n\n#### Windows\n[Read it! :D](https://github.com/ReactWindows/react-native)\n\n1. In Visual Studio add the `RNWowzaBroadcaster.sln` in `node_modules/react-native-wowza-broadcaster/windows/RNWowzaBroadcaster.sln` folder to their solution, reference from their app.\n2. Open up your `MainPage.cs` app\n  - Add `using Cl.Json.RNWowzaBroadcaster;` to the usings at the top of the file\n  - Add `new RNWowzaBroadcasterPackage()` to the `List<IReactPackage>` returned by the `Packages` method\n\n\n## Usage\n```javascript\nimport BroadcastView from 'react-native-wowza-broadcaster';\n\n  <BroadcastView style= {yourStyle}\n                 hostAddress = {hostaddress}\n                 applicationName = {applicationName}\n                 streamName = {streamName}\n                 broadcasting = {false} //change this value to start broadcast\n                 username = {username}\n                 password = {password}\n                 sizePreset = {3}\n                 port={}//default is 1935\n                 muted = {false}\n                 flashOn = {false}\n                 frontCamera =  {false}\n                 onBroadcastStart= {}\n                 onBroadcastFail= {}\n                 onBroadcastStatusChange= {}\n                 onBroadcastEventReceive= {}\n                 onBroadcastErrorReceive= {}\n                 onBroadcastVideoEncoded = {}\n                 onBroadcastStop = {}\n                 >\n  </BroadcastView>\n  ;\n  \n  //Using the broadcast module\n  var BroadcastManager =  NativeModules.BroadcastModule;\n  \n  BroadcastManager.startTimer(1, 3600);// first argument - timer interval, second argument time to timeout timer in seconds\n  \n  //Add listener to update broadcast time, callback will be fired by interval set when the timer was started\n  DeviceEventEmitter.addListener('broadcastTimer', (seconds) => {\n          //amount of time passed in seconds \n  });\n        \n  BroadcastManager.stopTimer();\n```\n  \n",
-  "readmeFilename": "README.md",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "Hugo Nagano",
+      "email": "hugo@medlmobile.com"
+    }
+  ]
+  
 }
