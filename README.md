@@ -62,7 +62,7 @@ import BroadcastView from 'react-native-wowza-broadcaster';
                  onBroadcastStatusChange= {}
                  onBroadcastEventReceive= {}
                  onBroadcastErrorReceive= {}
-                 onBroadcastVideoEncoded = {}
+                 onBroadcastVideoEncoded = {//ios only use this to get recording time}
                  onBroadcastStop = {}
                  >
   </BroadcastView>
@@ -71,12 +71,9 @@ import BroadcastView from 'react-native-wowza-broadcaster';
   //Using the broadcast module
   var BroadcastManager =  NativeModules.BroadcastModule;
   
-  BroadcastManager.startTimer(1, 3600);// first argument - timer interval, second argument time to timeout timer in seconds
+  BroadcastManager.startTimer(1, 3600);// Android only - first argument - timer interval, second argument time to timeout timer in seconds
   
-  //Add listener to update broadcast time, callback will be fired by interval set when the timer was started
-  DeviceEventEmitter.addListener('broadcastTimer', (seconds) => {
-          //amount of time passed in seconds 
-  });
+
         
   BroadcastManager.stopTimer();
 ```
