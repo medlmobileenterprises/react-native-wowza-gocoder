@@ -1,13 +1,13 @@
 
-# react-native-wowza-broadcaster
+# react-native-wowza-gocoder
 
 ## Getting started
 
-`$ npm install react-native-wowza-broadcaster --save`
+`$ npm install react-native-wowza-gocoder --save`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-wowza-broadcaster`
+`$ react-native link react-native-wowza-gocoder`
 
 ### Manual installation
 
@@ -26,7 +26,7 @@
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNWowzaBroadcasterPackage;` to the imports at the top of the file
+  - Add `import com.rngocoder.RNWowzaBroadcasterPackage;` to the imports at the top of the file
   - Add `new RNWowzaBroadcasterPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
@@ -37,6 +37,9 @@
   	```
       compile project(':react-native-wowza-broadcaster')
   	```
+##### Post installation Android
+1. After obtainting WowzaGoCoderSDK aar file, add them to your nodemodules/react-native-wowza-gocoder to the libs directory
+2. http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
 
 ## Usage
 ```javascript
