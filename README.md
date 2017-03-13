@@ -20,8 +20,8 @@
 4. Run your project (`Cmd+R`)<
 
 ##### Post installation iOS
-1. After obtainting WowzaGoCoderSDK framework and the wowzastaticlib, add them to your main project, in the root directory of the project
-2. Add the libraries to the build phases for your app target, add a copy files phase http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
+1. After obtaining WowzaGoCoderSDK framework and the wowzastatic-lib, add them both to a folder in the root directory of the project. 
+2. Add the WowzaGoCoderSDK.framework to the build phases for your app target, add a copy files phase with the WowzaGoCoder.SDK http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
 
 #### Android
 
@@ -38,7 +38,7 @@
       compile project(':react-native-wowza-broadcaster')
   	```
 ##### Post installation Android
-1. After obtainting WowzaGoCoderSDK aar file, add them to your nodemodules/react-native-wowza-gocoder to the libs directory
+1. After obtaining WowzaGoCoderSDK aar file, add it to your nodemodules/react-native-wowza-gocoder to the libs directory(create it if needed) 
 2. http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
 
 ## Usage
@@ -62,7 +62,7 @@ import BroadcastView from 'react-native-wowza-broadcaster';
                  onBroadcastStatusChange= {}
                  onBroadcastEventReceive= {}
                  onBroadcastErrorReceive= {}
-                 onBroadcastVideoEncoded = {//ios only use this to get recording time}
+                 onBroadcastVideoEncoded = {/*ios only use this to get recording time*/}
                  onBroadcastStop = {}
                  >
   </BroadcastView>
@@ -74,7 +74,12 @@ import BroadcastView from 'react-native-wowza-broadcaster';
   BroadcastManager.startTimer(1, 3600);// Android only - first argument - timer interval, second argument time to timeout timer in seconds
   
 
-        
+ //Stop Timer when stopping the broacast - Android only       
   BroadcastManager.stopTimer();
 ```
+## TODOS
+
+- [ ] Add better support for the size preset props for both platforms
+
+
   

@@ -4,21 +4,17 @@
     "url": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder.git"
   },
   "homepage": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder",
-  "author": "MEDL Mobile Enterprises",
+  "author": "MEDL Mobile Enterprises <dev@medlmobile.com> (https://github.com/medlmobileenterprises)",
   "dependencies": {},
-  "description": "## Getting started",
+  "description": "React Native Wrapper for the Wowza GoCoder SDK",
   "devDependencies": {},
-  "gitHead": "0d637bcf22d06118366437e79c530203353f45d7",
   "keywords": [
     "react-native"
   ],
   "license": "MIT",
   "main": "BroadcastView.js",
   "name": "react-native-wowza-gocoder",
-  "peerDependencies": {
-    "react-native": "^0.4.0"
-  },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": [
     {
       "name": "Hugo Nagano",
