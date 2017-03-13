@@ -37,6 +37,7 @@
   	```
       compile project(':react-native-wowza-broadcaster')
   	```
+    
 ##### Post installation Android
 1. After obtaining WowzaGoCoderSDK aar file, add it to your nodemodules/react-native-wowza-gocoder to the libs directory(create it if needed) 
 2. http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
