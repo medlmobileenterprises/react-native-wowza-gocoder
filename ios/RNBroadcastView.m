@@ -191,7 +191,7 @@
     }
 }
 -(void)brodcastVideoFrameWasEncoded:(NSInteger *)durationInSeconds{
-    self.onBroadcastVideoEncoded(@{@"encoded":[NSNumber numberWithInteger:durationInSeconds]});
+    self.onBroadcastVideoEncoded(@{@"seconds":[NSNumber numberWithInteger:durationInSeconds]});
 }
 
 @end
