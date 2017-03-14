@@ -6,11 +6,12 @@
   "homepage": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder",
   "author": "MEDL Mobile Enterprises <dev@medlmobile.com> (https://github.com/medlmobileenterprises)",
   "dependencies": {},
-  "description": "React Native Wrapper for the Wowza GoCoder SDK",
+  "description": "React Native wrapper for the Wowza GoCoder SDK",
   "devDependencies": {},
   "keywords": [
-    "react-native"
+    "react-native", "wowza", "gocoder", "video", "streaming"
   ],
+  "bugs": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder/issues",
   "license": "MIT",
   "main": "BroadcastView.js",
   "name": "react-native-wowza-gocoder",
