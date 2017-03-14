@@ -47,7 +47,7 @@ static BroadcastManager *sharedMyManager = nil;
                                        andBroadcastView:(UIView *)view
 {
     
-
+    
     WowzaConfig *config = [[WowzaConfig alloc] initWithPreset:sizePreset];
     config.hostAddress = hostAddress;
     config.portNumber = 1935;
