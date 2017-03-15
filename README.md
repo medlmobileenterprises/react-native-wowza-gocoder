@@ -78,9 +78,24 @@ import BroadcastView from 'react-native-wowza-broadcaster';
  //Stop Timer when stopping the broacast - Android only       
   BroadcastManager.stopTimer();
 ```
+
+## Running the example project
+1. Install and link dependencies
+```
+cd react-native-wowza-gocoder/example
+npm install
+react-native-link
+```
+2. Download the SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
+3. Unzip and add wowzagocoder_static_lib and WowzaGoCoderSDK.framework to /example/ios/
+4. Change the project bundle identifier to match the one tied to your GoCoder license key
+    * If you don't have a license key you can register for a free trial: https://www.wowza.com/products/gocoder/sdk/trial
+5. Configure your license key and server settings in example/index.js
+
 ## TODOS
 
 - [ ] Add better support for the size preset props for both platforms
+- [ ] Manage Android timer within BroadcastView component
 
 
   
