@@ -33,12 +33,12 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
   - Add `new RNWowzaBroadcasterPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
-  	include ':react-native-wowza-broadcaster'
-  	project(':react-native-wowza-broadcaster').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-wowza-broadcaster/android')
+  	include ':react-native-wowza-gocoder'
+  	project(':react-native-wowza-gocoder').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-wowza-gocoder/android')
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
-      compile project(':react-native-wowza-broadcaster')
+      compile project(':react-native-wowza-gocoder')
   	```
 
 ##### Post installation Android
