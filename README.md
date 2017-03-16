@@ -85,7 +85,7 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
 `<BroadcastView style= {styles.videoContainer}
                      hostAddress = {config.hostAddress}
                      applicationName = {config.applicationName}
-                     streamName = {config.streamName}
+                     broadcastName={config.streamName}
                      broadcasting = {false}
                      username = {config.username}
                      password = {config.password}
