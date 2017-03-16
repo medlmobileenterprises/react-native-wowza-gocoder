@@ -80,22 +80,32 @@ import BroadcastView from 'react-native-wowza-broadcaster';
 ```
 
 ## Running the example project
+
+### iOS
 1. Install and link dependencies
 ```
 cd react-native-wowza-gocoder/example
 npm install
 react-native-link
 ```
-2. Download the SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
-3. Unzip and add wowzagocoder_static_lib and WowzaGoCoderSDK.framework to /example/ios/
-4. Change the project bundle identifier to match the one tied to your GoCoder license key
+2. Download the GoCoder SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
+3. Unzip and add "wowzagocoder_static_lib" and "WowzaGoCoderSDK.framework" to /example/ios/
+4. Open /example/ios/example.xcodeproj in Xcode
+5. From the XCode Project Navigator, select the "example" project and the "example" target
+6. On the "General" tab configure the "Identity" settings with your app bundle identifier (should match the bundleID tied to your GoCoder license)
     * If you don't have a license key you can register for a free trial: https://www.wowza.com/products/gocoder/sdk/trial
-5. Configure your license key and server settings in example/index.js
+7. Configure your "Signing" settings with your provisioning profiles
+8. Configure your GoCoder license key and Wowza server settings in example/index.js as shown in the [Usage](#usage) section above
+9. Run your project on a device (will not work on simulator)
+
+### Android
+Coming soon
 
 ## TODOS
 
 - [ ] Add better support for the size preset props for both platforms
 - [ ] Manage Android timer within BroadcastView component
+- [ ] Create a sample project for Android
 
 
   
