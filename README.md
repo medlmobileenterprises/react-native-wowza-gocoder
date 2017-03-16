@@ -46,21 +46,24 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
 2. http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
 
 ## Usage
-```javascript
 
 1. Import the module
 `import BroadcastView from 'react-native-wowza-gocoder';`
 2. Set a config
-  `const config ={
+  ```javascript
+  const config ={
     hostAddress:'',
     applicationName:'',
     username:'',
     password:'',
     streamName:'',
     sdkLicenseKey:''
-  };`
+  };
+  ```
+  
 3. Add functions for debug, testing
-  `onBroadcastStart(){
+  ```javascript 
+  onBroadcastStart(){
     console.log("Bcast start");
   }
   onBroadcastFail(){
@@ -80,9 +83,12 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
   }
   onBroadcastStop(){
     console.log("Bcast stop");
-  }`
+  }
+  ```
+  
 4. Use the component in render
-`<BroadcastView style= {styles.videoContainer}
+```javascript 
+<BroadcastView style= {styles.videoContainer}
                      hostAddress = {config.hostAddress}
                      applicationName = {config.applicationName}
                      broadcastName={config.streamName}
@@ -103,30 +109,37 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
                      onBroadcastStop = {this.onBroadcastStop}
                      sdkLicenseKey={config.sdkLicenseKey}
       >
-  </BroadcastView>`
+  </BroadcastView> 
+  ```
+ 
+ 
 5. Be sure to use absolute positioning on your styles otherwise the video may not show correctly
-  `const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  videoContainer:{
-    position:'absolute',
-    top:0,
-    left:0,
-    right:0,
-    bottom:40
-  }
-  });`
+  ```javascript 
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    videoContainer:{
+      position:'absolute',
+      top:0,
+      left:0,
+      right:0,
+      bottom:40
+    }
+  });
+  ```
+* Optional: If you are familiar with controlling state then you could trigger start/stop of streaming by passing state in the BroadcastView component prop broadcasting.  example broadcasting = {false} to broadcasting = {this.state.brodcasting} *
   //Using the broadcast module
-  var BroadcastManager =  NativeModules.BroadcastModule;
+  
+  `var BroadcastManager =  NativeModules.BroadcastModule;`
 
-  BroadcastManager.startTimer(1, 3600);// Android only - first argument - timer interval, second argument time to timeout timer in seconds
+  `BroadcastManager.startTimer(1, 3600);`
+* Android only - first argument - timer interval, second argument time to timeout timer in seconds
 
+* Stop Timer when stopping the broadcast - Android only       
+  `BroadcastManager.stopTimer();`
 
- //Stop Timer when stopping the broacast - Android only       
-  BroadcastManager.stopTimer();
-```
 ## TODOS
 
 - [ ] Add better support for the size preset props for both platforms
