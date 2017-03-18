@@ -132,15 +132,38 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
 * Optional: If you are familiar with controlling state then you could trigger start/stop of streaming by passing state in the BroadcastView component prop broadcasting.  example broadcasting = {false} to broadcasting = {this.state.brodcasting} *
   //Using the broadcast module
   
-  `var BroadcastManager =  NativeModules.BroadcastModule;`
-
-  `BroadcastManager.startTimer(1, 3600);`
+    `var BroadcastManager =  NativeModules.BroadcastModule;`
+  
+    `BroadcastManager.startTimer(1, 3600);`
 * Android only - first argument - timer interval, second argument time to timeout timer in seconds
-
+  
 * Stop Timer when stopping the broadcast - Android only       
-  `BroadcastManager.stopTimer();`
+    `BroadcastManager.stopTimer();`
+
+## Running the example project
+
+### iOS
+1. Install and link dependencies
+```
+cd react-native-wowza-gocoder/example
+npm install
+react-native-link
+```
+2. Download the GoCoder SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
+3. Unzip and add "wowzagocoder_static_lib" and "WowzaGoCoderSDK.framework" to /example/ios/
+4. Open /example/ios/example.xcodeproj in Xcode
+5. From the Xcode Project Navigator, select the "example" project and the "example" target
+6. On the "General" tab configure the "Identity" settings with your app bundle identifier (should match the bundleID tied to your GoCoder license)
+    * If you don't have a license key you can register for a free trial: https://www.wowza.com/products/gocoder/sdk/trial
+7. Configure your "Signing" settings with your provisioning profiles
+8. Configure your GoCoder license key and Wowza server settings in example/index.js as shown in the [Usage](#usage) section above
+9. Run your project on a device (will not work on simulator)
+
+### Android
+Coming soon
 
 ## TODOS
 
 - [ ] Add better support for the size preset props for both platforms
 - [ ] Add a config for the different keys provided per platform
+- [ ] Create a sample project for Android

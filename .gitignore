@@ -34,6 +34,7 @@ captures/
 
 # Intellij
 *.iml
+.idea
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/libraries
@@ -54,3 +55,7 @@ android/.idea/copyright/profiles_settings.xml
 android/gradle/wrapper/gradle-wrapper.jar
 android/gradle/wrapper/gradle-wrapper.properties
 node_modules/
+
+# Wowza private SDKs
+example/ios/wowzagocoder_static_lib
+example/ios/WowzaGoCoderSDK.framework
