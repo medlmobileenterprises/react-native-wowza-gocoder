@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {StyleSheet, requireNativeComponent, NativeModules, View} from 'react-native';
-
+import {StyleSheet, requireNativeComponent, NativeModules, View, DeviceEventEmitter, Platform} from 'react-native';
+const BroadcastManager = NativeModules.BroadcastModule;
 
 const styles = StyleSheet.create({
   base: {
@@ -13,11 +13,21 @@ export default class BroadcastView extends Component {
   setNativeProps(nativeProps) {
     this._root.setNativeProps(nativeProps);
   }
+  componentWillMount(){
+    if(Platform.OS == 'android'){
+      DeviceEventEmitter.addListener('broadcastTimer', (seconds) => {
+        this.props.onBroadcastVideoEncoded({seconds:seconds})
+      });
+    }
+  }
   _assignRoot = (component) => {
     this._root = component;
   };
 
   _onBroadcastStart = (event) => {
+    if(Platform.OS == 'android'){
+      BroadcastManager.startTimer(1.1, 3600);
+    }
     if (this.props.onBroadcastStart) {
       this.props.onBroadcastStart(event.nativeEvent);
     }
@@ -75,25 +85,24 @@ export default class BroadcastView extends Component {
 
     return (
         <RNBroadcastView
-    ref={this._assignRoot}
-    {...nativeProps}
-  />
-  );
+            ref={this._assignRoot}
+            {...nativeProps}
+        />
+    );
   }
 }
 
 BroadcastView.propTypes = {
-  onFrameChange: React.PropTypes.func,
-  hostAddress: React.PropTypes.string,
-  applicationName: React.PropTypes.string,
-  sdkLicenseKey: React.PropTypes.string,
-  broadcastName: React.PropTypes.string,
+  hostAddress: React.PropTypes.string.isRequired,
+  applicationName: React.PropTypes.string.isRequired,
+  sdkLicenseKey: React.PropTypes.string.isRequired,
+  broadcastName: React.PropTypes.string.isRequired,
   backgroundMode: React.PropTypes.bool,
   sizePreset :React.PropTypes.number,
   port: React.PropTypes.number,
-  username: React.PropTypes.string,
-  password: React.PropTypes.string,
-  broadcasting: React.PropTypes.bool,
+  username: React.PropTypes.string.isRequired,
+  password: React.PropTypes.string.isRequired,
+  broadcasting: React.PropTypes.bool.isRequired,
   muted: React.PropTypes.bool,
   flashOn: React.PropTypes.bool,
   frontCamera: React.PropTypes.bool,
@@ -104,7 +113,7 @@ BroadcastView.propTypes = {
   onBroadcastErrorReceive: PropTypes.func,
   onBroadcastVideoEncoded: PropTypes.func,
   onBroadcastStop: PropTypes.func,
-    ...View.propTypes,
+  ...View.propTypes,
 };
 
 const RNBroadcastView = requireNativeComponent('RNBroadcastView', BroadcastView);

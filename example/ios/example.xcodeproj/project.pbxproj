@@ -762,6 +762,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.medlmobile.rngocoder;
 				PRODUCT_NAME = example;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -783,6 +784,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.medlmobile.rngocoder;
 				PRODUCT_NAME = example;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
