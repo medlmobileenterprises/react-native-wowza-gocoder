@@ -9,18 +9,21 @@
   "description": "React Native wrapper for the Wowza GoCoder SDK",
   "devDependencies": {},
   "keywords": [
-    "react-native", "wowza", "gocoder", "video", "streaming"
+    "react-native",
+    "wowza",
+    "gocoder",
+    "video",
+    "streaming"
   ],
   "bugs": "https://github.com/medlmobileenterprises/react-native-wowza-gocoder/issues",
   "license": "MIT",
   "main": "BroadcastView.js",
   "name": "react-native-wowza-gocoder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "contributors": [
     {
       "name": "Hugo Nagano",
       "email": "hugo@medlmobile.com"
     }
   ]
-  
 }
