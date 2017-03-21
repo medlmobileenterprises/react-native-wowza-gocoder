@@ -42,8 +42,27 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
   	```
 
 ##### Post installation Android
-1. After obtaining WowzaGoCoderSDK aar file, add it to your nodemodules/react-native-wowza-gocoder to the libs directory(create it if needed)
-2. http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
+1. After obtaining WowzaGoCoderSDK aar file, add it to your nodemodules/react-native-wowza-gocoder to the libs directory(create it if needed), it's also need to add the dependency on your main app, add the aar file to libs directory(create it if needed). 
+2. Then add the following lines to both build.gradle files, on nodemodules/react-native-wowza-gocoder and app/build.gradle
+``` build.gradle
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    
+    dependencies {
+        compile fileTree(dir: 'libs', include: ['*.jar'])
+    
+        // The GoCoder SDK library dependency declaration
+        compile 'com.wowza.gocoder.sdk.android:com.wowza.gocoder.sdk:1.0@aar'
+    
+        // List additional dependencies here...
+    
+    }
+```
+
+3. http://www.wowza.com/resources/gocodersdk/docs/1.0/intro-installation/
 
 ## Usage
 
