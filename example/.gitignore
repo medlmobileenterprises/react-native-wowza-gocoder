@@ -51,3 +51,8 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+# Example app Wowza SDKs
+ios/wowzagocoder_static_lib
+ios/WowzaGoCoderSDK.framework
+android/app/libs/com.wowza.gocoder.sdk.aar
