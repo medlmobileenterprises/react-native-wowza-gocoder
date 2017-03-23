@@ -161,25 +161,32 @@ This is a Native Module for React Native that allows integration of Wowza's GoCo
 
 ## Running the example project
 
-### iOS
-1. Install and link dependencies
+Install and link dependencies
 ```
 cd react-native-wowza-gocoder/example
 npm install
 react-native-link
 ```
-2. Download the GoCoder SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
-3. Unzip and add "wowzagocoder_static_lib" and "WowzaGoCoderSDK.framework" to /example/ios/
-4. Open /example/ios/example.xcodeproj in Xcode
-5. From the Xcode Project Navigator, select the "example" project and the "example" target
-6. On the "General" tab configure the "Identity" settings with your app bundle identifier (should match the bundleID tied to your GoCoder license)
+
+### iOS
+1. Download the GoCoder SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
+2. Unzip and add "wowzagocoder_static_lib" and "WowzaGoCoderSDK.framework" to /example/ios/
+3. Open /example/ios/example.xcodeproj in Xcode
+4. From the Xcode Project Navigator, select the "example" project and the "example" target
+5. On the "General" tab configure the "Identity" settings with your app bundle identifier (should match the bundleID tied to your GoCoder license)
     * If you don't have a license key you can register for a free trial: https://www.wowza.com/products/gocoder/sdk/trial
-7. Configure your "Signing" settings with your provisioning profiles
-8. Configure your GoCoder license key and Wowza server settings in example/index.js as shown in the [Usage](#usage) section above
-9. Run your project on a device (will not work on simulator)
+6. Configure your "Signing" settings with your provisioning profiles
+7. Configure your GoCoder license key and Wowza server settings in example/wowzaConfig.js
+8. Run your project on a device (will not work properly on simulator)
 
 ### Android
-Coming soon
+1. Download the GoCoder SDK - https://www.wowza.com/pricing/installer#gocodersdk-downloads
+2. Unzip and add "com.wowza.gocoder.sdk.aar" to /example/android/app/libs/ (you may have to create the libs folder)
+3. Also add "com.wowza.gocoder.sdk.aar" to /example/node_modules/react-native-wowza-broadcaster/libs/
+3. Open /example/android in Android Studio and rename the package to match the package name tied to your GoCoder license
+    * If you don't have a license key you can register for a free trial: https://www.wowza.com/products/gocoder/sdk/trial
+7. Configure your GoCoder license key and Wowza server settings in example/wowzaConfig.js
+8. Run your project on a device (will not work properly on simulator)
 
 ## TODOS
 
