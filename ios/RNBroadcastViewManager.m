@@ -17,7 +17,6 @@ RCT_EXPORT_MODULE();
 - (UIView *) view {
     return [[RNBroadcastView alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
 }
-RCT_EXPORT_VIEW_PROPERTY(onFrameChange, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(hostAddress, NSString);
 RCT_EXPORT_VIEW_PROPERTY(applicationName, NSString);
 RCT_EXPORT_VIEW_PROPERTY(broadcastName, NSString);
@@ -43,8 +42,7 @@ RCT_EXPORT_VIEW_PROPERTY(onBroadcastStop, RCTDirectEventBlock);
 }
 
 - (NSArray *) customDirectEventTypes {
-    return @[@"onFrameChange",
-             @"onBroadcastStart",
+    return @[@"onBroadcastStart",
              @"onBroadcastFail",
              @"onBroadcastStatusChange",
              @"onBroadcastEventReceive",
