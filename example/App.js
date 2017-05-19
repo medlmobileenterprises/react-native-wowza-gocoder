@@ -12,11 +12,13 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Dimensions
+  Dimensions,
+  Alert
 } from 'react-native';
 import BroadcastView from 'react-native-wowza-gocoder';
 import config from './wowzaConfig';
 const {width, height} = Dimensions.get('window');
+const Permissions = require('react-native-permissions');
 
 export default class App extends Component {
   constructor(props){
@@ -27,17 +29,63 @@ export default class App extends Component {
       flashEnabled:false,
       frontCamera:false,
       recordingTime: '00:00:00',
-      recordButtonImage: require('./assets/Rec.png')
+      recordButtonImage: require('./assets/Rec.png'),
+      permissionGranted:false
     }
   }
+  componentDidMount(){
+    Permissions.checkMultiplePermissions(['camera', 'microphone']).then((response) =>{
+
+      const permissionGranted = (response.camera === "authorized" && response.microphone === "authorized");
+      if(!permissionGranted){
+        this._requestPermissions()
+      }
+
+      this.setState({
+        permissionGranted:permissionGranted
+      })
+    })
+  }
+  _requestPermissions() {
+    let cameraPermission = this.state.cameraPermissionOn;
+    let microphonePermission = this.state.microphonePermissionOn;
+    Permissions.requestPermission('camera').then(response => {
+      if(response === 'authorized'){
+        cameraPermission = true
+      }
+      Permissions.requestPermission('microphone').then(resp => {
+        if (resp === 'authorized'){
+          microphonePermission = true
+        }
+        if(!(cameraPermission && microphonePermission)){
+          Alert.alert(
+              'Broadcast',
+              'In order to broadcast We need access to your camera, microphone',
+              [
+                {text: 'No way', onPress: null },
+                {text: 'Open Settings', onPress: Permissions.openSettings}
+              ]
+          )
+        }
+        this.setState({
+          permissionGranted:(cameraPermission && microphonePermission)
+        })
+      })
+    })
+  }
   render() {
+    if(!this.state.permissionGranted){
+      return(<View style={{backgroundColor:'black'}}>
+          </View>
+        )
+    }
     return (
       <View style={styles.container}>
         <BroadcastView style={styles.contentArea}
                        hostAddress={config.hostAddress}
                        applicationName={config.applicationName}
                        sdkLicenseKey={config.sdkLicenseKey}
-                       broadcastName={'BROADCAST_NAME'}
+                       broadcastName={config.streamName}
                        username={config.username}
                        password={config.password}
                        backgroundMode={false}
