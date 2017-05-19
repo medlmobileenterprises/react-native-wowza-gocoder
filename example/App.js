@@ -47,8 +47,8 @@ export default class App extends Component {
     })
   }
   _requestPermissions() {
-    let cameraPermission = this.state.cameraPermissionOn;
-    let microphonePermission = this.state.microphonePermissionOn;
+    let cameraPermission = false;
+    let microphonePermission = false;
     Permissions.requestPermission('camera').then(response => {
       if(response === 'authorized'){
         cameraPermission = true
