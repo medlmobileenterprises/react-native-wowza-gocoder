@@ -94,5 +94,8 @@ static BroadcastManager *sharedMyManager = nil;
         [broadcast updateBroadcastViewPosition:frame];
     });
 }
++(void)changeStreamName:(NSString *)name andBroadcastView:(WMBroadcastView *)broadcast {
+    [broadcast setStreamName:name];
+}
 
 @end
