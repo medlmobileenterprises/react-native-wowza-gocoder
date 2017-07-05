@@ -171,6 +171,7 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     public boolean isBroadcasting() {
         return broadcasting;
     }
+    
 
     public void setBroadcasting(boolean broadcasting) {
         if(goCoder == null){
@@ -211,7 +212,6 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
                         broadcast.putString("broadcastName", getBroadcastName());
                         broadcast.putString("status", "stopped");
                         event.putMap("event", broadcast);
-                        stopCamera();
                         mEventEmitter.receiveEvent(getId(), Events.EVENT_BROADCAST_STOP.toString(), event);
                     }
                 }
