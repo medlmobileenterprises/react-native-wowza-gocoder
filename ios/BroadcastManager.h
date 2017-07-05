@@ -38,4 +38,5 @@ static NSString *didStopBroadcast                 = @"onBroadcastStop";
 
 +(void)releaseBroadcast:(WMBroadcastView *) broadcast;
 +(void)changeFrame:(CGRect)frame andBroadcastView:(WMBroadcastView *) broadcast;
++(void)changeStreamName:(NSString *)name andBroadcastView:(WMBroadcastView *)broadcast;
 @end

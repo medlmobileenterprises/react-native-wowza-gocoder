@@ -108,6 +108,9 @@ NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
 -(void)setFlashState:(BOOL)state{
     self.goCoder.cameraPreview.camera.torchOn = state;
 }
+-(void)setStreamName:(NSString*)name{
+    self.goCoder.config.streamName = name;
+}
 -(NSUInteger)invertCamera{
     WZCamera *otherCamera = [self.goCoderCameraPreview otherCamera];
     if (![otherCamera supportsWidth:self.wozwaConfig.videoWidth]) {
