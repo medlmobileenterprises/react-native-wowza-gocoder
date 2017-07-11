@@ -142,6 +142,10 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
 
     public void setBroadcastName(String broadcastName) {
         this.broadcastName = broadcastName;
+
+        if (goCoder != null) {
+            BroadcastManager.changeStreamName(goCoder, this.broadcastName);
+        }
     }
 
     public int getSizePreset() {

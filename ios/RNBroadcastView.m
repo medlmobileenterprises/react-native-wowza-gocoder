@@ -145,6 +145,10 @@
     [BroadcastManager invertCamera:self.broadcast];
     _frontCamera = frontCamera;
 }
+-(void)setBroadcastName:(NSString *)broadcastName{
+    [BroadcastManager changeStreamName:broadcastName andBroadcastView:self.broadcast];
+    _broadcastName = broadcastName;
+}
 #pragma mark - WMBroadcastViewDelegate Methods
 
 -(void)didStartBroacast{

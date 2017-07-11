@@ -68,6 +68,11 @@ public class BroadcastManager {
             mGoCoder.unmuteAudio();
         }
     }
+    public static void changeStreamName(WowzaGoCoder mGoCoder, String broadcastName){
+        WowzaConfig broadcastConfig = mGoCoder.getConfig();
+        broadcastConfig.setStreamName(broadcastName);
+        mGoCoder.setConfig(broadcastConfig);
+    }
 
     private static WZMediaConfig getSizePresetWithInt(int sizePreset){
         switch (sizePreset){

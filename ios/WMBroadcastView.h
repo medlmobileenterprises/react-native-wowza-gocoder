@@ -26,5 +26,6 @@ typedef void (^completionBlock)(NSError *error);
 -(void)setFlashState:(BOOL)state;
 -(NSUInteger)invertCamera;
 -(void)closeBroadcast;
+-(void)setStreamName:(NSString*)name;
 
 @end
