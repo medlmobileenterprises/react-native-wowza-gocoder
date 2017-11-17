@@ -14,6 +14,9 @@ import com.wowza.gocoder.sdk.api.status.WZState;
 import com.wowza.gocoder.sdk.api.status.WZStatus;
 import com.wowza.gocoder.sdk.api.status.WZStatusCallback;
 
+import android.support.v4.view.GestureDetectorCompat;
+import com.wowza.gocoder.sdk.api.devices.WZCamera;
+
 
 /**
  * Created by hugonagano on 11/7/16.
@@ -55,7 +58,9 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     private boolean muted = false;
     private int sizePreset;
     private WowzaGoCoder goCoder;
-
+    private boolean autoFocus = true;
+    protected GestureDetectorCompat mAutoFocusDetector = null;
+    
     public BroadcastView(ThemedReactContext context){
         super(context);
 
@@ -93,9 +98,16 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
             cameraView.startPreview();
         }
 
+        if (goCoder != null && cameraView != null) {
+            if (mAutoFocusDetector == null)
+                mAutoFocusDetector = new GestureDetectorCompat(localContext, new AutoFocusListener(localContext, cameraView));
+
+            WZCamera activeCamera = cameraView.getCamera();
+            if (activeCamera != null && activeCamera.hasCapability(WZCamera.FOCUS_MODE_CONTINUOUS))
+                activeCamera.setFocusMode(WZCamera.FOCUS_MODE_CONTINUOUS);
+        }
     }
-
-
+    
 
     public void setCameraType(Integer cameraType) {
         this.cameraView.setCamera(cameraType);
@@ -178,6 +190,11 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     
 
     public void setBroadcasting(boolean broadcasting) {
+
+        WZCamera activeCamera = this.cameraView.getCamera();
+        if (activeCamera != null && activeCamera.hasCapability(WZCamera.FOCUS_MODE_CONTINUOUS))
+            activeCamera.setFocusMode(WZCamera.FOCUS_MODE_CONTINUOUS);
+            
         if(goCoder == null){
             return;
         }

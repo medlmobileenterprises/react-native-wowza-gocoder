@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import { PropTypes } from "prop-types";
 import {StyleSheet, requireNativeComponent, NativeModules, View, DeviceEventEmitter, Platform} from 'react-native';
 const BroadcastManager = NativeModules.BroadcastModule;
 
@@ -93,19 +94,19 @@ export default class BroadcastView extends Component {
 }
 
 BroadcastView.propTypes = {
-  hostAddress: React.PropTypes.string.isRequired,
-  applicationName: React.PropTypes.string.isRequired,
-  sdkLicenseKey: React.PropTypes.string.isRequired,
-  broadcastName: React.PropTypes.string.isRequired,
-  backgroundMode: React.PropTypes.bool,
-  sizePreset :React.PropTypes.number,
-  port: React.PropTypes.number,
-  username: React.PropTypes.string.isRequired,
-  password: React.PropTypes.string.isRequired,
-  broadcasting: React.PropTypes.bool.isRequired,
-  muted: React.PropTypes.bool,
-  flashOn: React.PropTypes.bool,
-  frontCamera: React.PropTypes.bool,
+  hostAddress: PropTypes.string.isRequired,
+  applicationName: PropTypes.string.isRequired,
+  sdkLicenseKey: PropTypes.string.isRequired,
+  broadcastName: PropTypes.string.isRequired,
+  backgroundMode: PropTypes.bool,
+  sizePreset: PropTypes.number,
+  port: PropTypes.number,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  broadcasting: PropTypes.bool.isRequired,
+  muted: PropTypes.bool,
+  flashOn: PropTypes.bool,
+  frontCamera: PropTypes.bool,
   onBroadcastStart: PropTypes.func,
   onBroadcastFail: PropTypes.func,
   onBroadcastStatusChange: PropTypes.func,
