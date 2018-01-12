@@ -58,7 +58,6 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     private boolean muted = false;
     private int sizePreset;
     private WowzaGoCoder goCoder;
-    private boolean autoFocus = true;
     protected GestureDetectorCompat mAutoFocusDetector = null;
     
     public BroadcastView(ThemedReactContext context){
