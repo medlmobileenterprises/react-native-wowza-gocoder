@@ -37,6 +37,7 @@
 @property (nonatomic, assign) NSNumber *port;
 @property (nonatomic, strong) NSString *applicationName;
 @property (nonatomic, strong) NSString *broadcastName;
+@property (nonatomic, strong) NSString *videoOrientation;
 @property (nonatomic, assign) BOOL backgroundMode;
 @property (nonatomic, assign) NSInteger sizePreset;
 @property (nonatomic, strong) NSString *username;
@@ -100,6 +101,7 @@
                                                                   password:self.password
                                                             backgroundMode:self.backgroundMode
                                                                 sizePreset:self.sizePreset
+                                                          videoOrientation:self.videoOrientation
                                                           andBroadcastView:self];
         self.broadcast.delegate = self;
     }

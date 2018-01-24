@@ -44,6 +44,7 @@ static BroadcastManager *sharedMyManager = nil;
                                                password:(NSString *)password
                                          backgroundMode:(BOOL)backgroundMode
                                              sizePreset:(NSInteger)sizePreset
+                                       videoOrientation:(NSString *)videoOrientation
                                        andBroadcastView:(UIView *)view
 {
     
@@ -60,6 +61,7 @@ static BroadcastManager *sharedMyManager = nil;
     config.backgroundBroadcastEnabled = backgroundMode;
     config.username = username;
     config.password = password;
+    config.broadcastVideoOrientation = [BroadcastManager getBroadcastOrientation:videoOrientation];
     
     NSLog(@"user %@", username);
     NSLog(@"Password %@", password);
@@ -96,6 +98,16 @@ static BroadcastManager *sharedMyManager = nil;
 }
 +(void)changeStreamName:(NSString *)name andBroadcastView:(WMBroadcastView *)broadcast {
     [broadcast setStreamName:name];
+}
+
++(WZBroadcastOrientation)getBroadcastOrientation:(NSString *)orientationString {
+    if ([orientationString isEqualToString:@"landscape"]) {
+        return WZBroadcastOrientationAlwaysLandscape;
+    } else if ([orientationString isEqualToString:@"portrait"]) {
+        return WZBroadcastOrientationAlwaysPortrait;
+    }
+    
+    return WZBroadcastOrientationSameAsDevice;
 }
 
 @end

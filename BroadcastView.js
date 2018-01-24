@@ -100,6 +100,7 @@ BroadcastView.propTypes = {
   broadcastName: PropTypes.string.isRequired,
   backgroundMode: PropTypes.bool,
   sizePreset: PropTypes.number,
+  videoOrientation: PropTypes.oneOf(['landscape', 'portrait']),
   port: PropTypes.number,
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
