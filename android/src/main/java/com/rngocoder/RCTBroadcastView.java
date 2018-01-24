@@ -24,6 +24,7 @@ public class RCTBroadcastView extends ViewGroupManager<BroadcastView>  {
     private static final String PROP_APPLICATION_NAME = "applicationName";
     private static final String PROP_SDK_LICENSE = "sdkLicenseKey";
     private static final String PROP_SIZE_PRESET = "sizePreset";
+    private static final String PROP_VIDEO_ORIENTATION = "videoOrientation";
     private static final String PROP_USERNAME = "username";
     private static final String PROP_PASSWORD = "password";
     private static final String PROP_BROADCASTING = "broadcasting";
@@ -83,6 +84,10 @@ public class RCTBroadcastView extends ViewGroupManager<BroadcastView>  {
     public void setSizePreset(BroadcastView view, int sizePreset){
         view.setSizePreset(sizePreset);
     }
+    @ReactProp(name = PROP_VIDEO_ORIENTATION)
+    public void setVideoOrientation(BroadcastView view, String videoOrientation){
+        view.setVideoOrientation(videoOrientation);
+    }
     @ReactProp(name = PROP_USERNAME)
     public void setUsername(BroadcastView view, String username){
         view.setUsername(username);
@@ -115,3 +120,4 @@ public class RCTBroadcastView extends ViewGroupManager<BroadcastView>  {
 
 
 }
+
