@@ -13,7 +13,7 @@ import com.wowza.gocoder.sdk.api.status.WZStatusCallback;
 
 
 public class BroadcastManager {
-    public static WowzaGoCoder initBroadcast(Context localContext, String hostAddress, String applicationName, String broadcastName, String sdkLicenseKey, String username, String password,int sizePreset,WZCameraView cameraView){
+    public static WowzaGoCoder initBroadcast(Context localContext, String hostAddress, String applicationName, String broadcastName, String sdkLicenseKey, String username, String password,int sizePreset, String videoOrientation, WZCameraView cameraView){
         WowzaGoCoder mGoCoder = WowzaGoCoder.init(localContext, sdkLicenseKey);
         WowzaConfig broadcastConfig = new WowzaConfig();
         // Update the active config to the defaults for 720p video
@@ -21,6 +21,7 @@ public class BroadcastManager {
         broadcastConfig.setAudioBitRate(22400);
         broadcastConfig.setVideoFramerate(12);
         broadcastConfig.set(getSizePresetWithInt(sizePreset));
+        broadcastConfig.setVideoRotation(getRotationFromVideoOrientation(videoOrientation));
 
         // Set the address for the Wowza Streaming Engine server or Wowza Cloud
         broadcastConfig.setHostAddress(hostAddress);
@@ -96,6 +97,17 @@ public class BroadcastManager {
                 return  WZMediaConfig.FRAME_SIZE_3840x2160;
             default:
                 return WZMediaConfig.FRAME_SIZE_640x480;
+        }
+    }
+
+    private static int getRotationFromVideoOrientation(String orientation) {
+        switch (orientation) {
+            case "landscape":
+                return WZMediaConfig.orientationToRotation(WZMediaConfig.ORIENTATION_LANDSCAPE);
+            case "portrait":
+                return WZMediaConfig.orientationToRotation(WZMediaConfig.ORIENTATION_PORTRAIT);
+            default:
+                return 0;
         }
     }
 }

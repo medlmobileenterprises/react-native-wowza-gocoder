@@ -51,6 +51,7 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     private String broadcastName;
     private String username;
     private String password;
+    private String videoOrientation;
     private RCTEventEmitter mEventEmitter;
     private boolean broadcasting = false;
     private boolean flashOn = false;
@@ -62,7 +63,6 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     
     public BroadcastView(ThemedReactContext context){
         super(context);
-
 
         localContext = context;
         mEventEmitter = localContext.getJSModule(RCTEventEmitter.class);
@@ -90,7 +90,7 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     @Override
     public void onHostResume() {
         if(goCoder == null && cameraView != null) {
-            goCoder = BroadcastManager.initBroadcast(localContext, getHostAddress(), getApplicationName(), getBroadcastName(), getSdkLicenseKey(), getUsername(), getPassword(), getSizePreset(), cameraView);
+            goCoder = BroadcastManager.initBroadcast(localContext, getHostAddress(), getApplicationName(), getBroadcastName(), getSdkLicenseKey(), getUsername(), getPassword(), getSizePreset(), getVideoOrientation(), cameraView);
 
         }
         if(cameraView != null){
@@ -182,6 +182,10 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getVideoOrientation() { return videoOrientation; }
+
+    public void setVideoOrientation(String videoOrientation) { this.videoOrientation = videoOrientation; }
 
     public boolean isBroadcasting() {
         return broadcasting;
