@@ -8,7 +8,9 @@ import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.wowza.gocoder.sdk.api.WowzaGoCoder;
+import com.wowza.gocoder.sdk.api.broadcast.WZBroadcast;
+import com.wowza.gocoder.sdk.api.broadcast.WZBroadcastConfig;
+import com.wowza.gocoder.sdk.api.devices.WZAudioDevice;
 import com.wowza.gocoder.sdk.api.devices.WZCameraView;
 import com.wowza.gocoder.sdk.api.status.WZState;
 import com.wowza.gocoder.sdk.api.status.WZStatus;
@@ -43,6 +45,10 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
             return mName;
         }
     }
+
+    private WZBroadcast broadcast;
+    private WZBroadcastConfig broadcastConfig;
+    private WZAudioDevice audioDevice;
     private WZCameraView cameraView;
     private ThemedReactContext localContext;
     private String sdkLicenseKey;
@@ -58,7 +64,6 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     private boolean frontCamera = false;
     private boolean muted = false;
     private int sizePreset;
-    private WowzaGoCoder goCoder;
     protected GestureDetectorCompat mAutoFocusDetector = null;
     
     public BroadcastView(ThemedReactContext context){
@@ -66,7 +71,9 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
 
         localContext = context;
         mEventEmitter = localContext.getJSModule(RCTEventEmitter.class);
+        audioDevice = new WZAudioDevice();
         cameraView = new WZCameraView(context);
+        broadcast = new WZBroadcast();
         localContext.addLifecycleEventListener(this);
         cameraView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         cameraView.getCamera().setTorchOn(false);
@@ -89,15 +96,15 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
 
     @Override
     public void onHostResume() {
-        if(goCoder == null && cameraView != null) {
-            goCoder = BroadcastManager.initBroadcast(localContext, getHostAddress(), getApplicationName(), getBroadcastName(), getSdkLicenseKey(), getUsername(), getPassword(), getSizePreset(), getVideoOrientation(), cameraView);
-
+        if(broadcastConfig == null && cameraView != null) {
+            broadcastConfig = BroadcastManager.initBroadcast(localContext, getHostAddress(), getApplicationName(), getBroadcastName(), getSdkLicenseKey(), getUsername(), getPassword(), getSizePreset(), getVideoOrientation(), cameraView, audioDevice);
         }
+
         if(cameraView != null){
             cameraView.startPreview();
         }
 
-        if (goCoder != null && cameraView != null) {
+        if (broadcastConfig != null && cameraView != null) {
             if (mAutoFocusDetector == null)
                 mAutoFocusDetector = new GestureDetectorCompat(localContext, new AutoFocusListener(localContext, cameraView));
 
@@ -119,7 +126,6 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     public void stopCamera() {
         this.cameraView.stopPreview();
         this.cameraView = null;
-        this.goCoder = null;
     }
 
 
@@ -154,8 +160,8 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     public void setBroadcastName(String broadcastName) {
         this.broadcastName = broadcastName;
 
-        if (goCoder != null) {
-            BroadcastManager.changeStreamName(goCoder, this.broadcastName);
+        if (broadcastConfig != null) {
+            BroadcastManager.changeStreamName(broadcastConfig, this.broadcastName);
         }
     }
 
@@ -198,11 +204,12 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
         if (activeCamera != null && activeCamera.hasCapability(WZCamera.FOCUS_MODE_CONTINUOUS))
             activeCamera.setFocusMode(WZCamera.FOCUS_MODE_CONTINUOUS);
             
-        if(goCoder == null){
+        if(broadcastConfig == null){
             return;
         }
+
         if(!this.isBroadcasting()){
-            BroadcastManager.startBroadcast(goCoder, new WZStatusCallback(){
+            BroadcastManager.startBroadcast(broadcast, broadcastConfig, new WZStatusCallback(){
                 @Override
                 public void onWZStatus(WZStatus wzStatus) {
                     if(wzStatus.getState() == WZState.RUNNING){
@@ -226,7 +233,7 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
             });
         }
         else{
-            BroadcastManager.stopBroadcast(goCoder, new WZStatusCallback() {
+            BroadcastManager.stopBroadcast(broadcast, new WZStatusCallback() {
                 @Override
                 public void onWZStatus(WZStatus wzStatus) {
                     if(wzStatus.getState() == WZState.IDLE){
@@ -258,8 +265,8 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     }
 
     public void setFlashOn(boolean flashOn) {
-        if(goCoder != null) {
-            BroadcastManager.turnFlash(goCoder, flashOn);
+        if(cameraView != null) {
+            BroadcastManager.turnFlash(cameraView, flashOn);
             this.flashOn = flashOn;
         }
     }
@@ -269,8 +276,8 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     }
 
     public void setFrontCamera(boolean frontCamera) {
-        if(goCoder != null) {
-            BroadcastManager.invertCamera(goCoder);
+        if(cameraView != null) {
+            BroadcastManager.invertCamera(cameraView);
             this.frontCamera = frontCamera;
         }
     }
@@ -280,9 +287,10 @@ public class BroadcastView extends FrameLayout implements LifecycleEventListener
     }
 
     public void setMuted(boolean muted) {
-        if(goCoder != null) {
-            BroadcastManager.mute(goCoder, muted);
+        if(audioDevice != null) {
+            BroadcastManager.mute(audioDevice, muted);
             this.muted = muted;
         }
     }
 }
+
