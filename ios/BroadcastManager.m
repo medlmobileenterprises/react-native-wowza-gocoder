@@ -62,6 +62,9 @@ static BroadcastManager *sharedMyManager = nil;
     config.username = username;
     config.password = password;
     config.broadcastVideoOrientation = [BroadcastManager getBroadcastOrientation:videoOrientation];
+    if (videoOrientation) {
+        config.capturedVideoRotates = NO;
+    }
     
     NSLog(@"user %@", username);
     NSLog(@"Password %@", password);
