@@ -45,6 +45,7 @@ static BroadcastManager *sharedMyManager = nil;
                                          backgroundMode:(BOOL)backgroundMode
                                              sizePreset:(NSInteger)sizePreset
                                        videoOrientation:(NSString *)videoOrientation
+                                            frontCamera:(BOOL)frontCamera
                                        andBroadcastView:(UIView *)view
 {
     
@@ -72,6 +73,11 @@ static BroadcastManager *sharedMyManager = nil;
     WMBroadcastView *broadcast = [[WMBroadcastView alloc] initWithLicenseKey:sdkLicence andStreamConfig:config];
     
     [broadcast initializeBroadcastView:view];
+    
+    if (frontCamera) {
+        [self invertCamera:broadcast]
+    }
+    
     return broadcast;
 }
 +(void)startBroadcast:(WMBroadcastView *) broadcast{
