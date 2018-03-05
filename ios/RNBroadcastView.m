@@ -102,6 +102,7 @@
                                                             backgroundMode:self.backgroundMode
                                                                 sizePreset:self.sizePreset
                                                           videoOrientation:self.videoOrientation
+                                                               frontCamera:self.frontCamera
                                                           andBroadcastView:self];
         self.broadcast.delegate = self;
     }

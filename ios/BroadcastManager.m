@@ -75,7 +75,7 @@ static BroadcastManager *sharedMyManager = nil;
     [broadcast initializeBroadcastView:view];
     
     if (frontCamera) {
-        [self invertCamera:broadcast]
+        [self invertCamera:broadcast];
     }
     
     return broadcast;
