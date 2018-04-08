@@ -58,7 +58,7 @@ static BroadcastManager *sharedMyManager = nil;
     }
     config.applicationName = applicationName;
     config.streamName = broadcastName;
-    config.broadcastScaleMode = WZBroadcastScaleModeAspectFill;
+    config.broadcastScaleMode = WOWZBroadcastScaleModeAspectFill;
     config.backgroundBroadcastEnabled = backgroundMode;
     config.username = username;
     config.password = password;
@@ -109,14 +109,14 @@ static BroadcastManager *sharedMyManager = nil;
     [broadcast setStreamName:name];
 }
 
-+(WZBroadcastOrientation)getBroadcastOrientation:(NSString *)orientationString {
++(WOWZBroadcastOrientation)getBroadcastOrientation:(NSString *)orientationString {
     if ([orientationString isEqualToString:@"landscape"]) {
-        return WZBroadcastOrientationAlwaysLandscape;
+        return WOWZBroadcastOrientationAlwaysLandscape;
     } else if ([orientationString isEqualToString:@"portrait"]) {
-        return WZBroadcastOrientationAlwaysPortrait;
+        return WOWZBroadcastOrientationAlwaysPortrait;
     }
     
-    return WZBroadcastOrientationSameAsDevice;
+    return WOWZBroadcastOrientationSameAsDevice;
 }
 
 @end

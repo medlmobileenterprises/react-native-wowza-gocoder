@@ -161,20 +161,20 @@
     //show error
     self.onBroadcastFail(@{@"error":error.localizedDescription});
 }
--(void)broadcastStatusDidChange:(WZState)state{
+-(void)broadcastStatusDidChange:(WOWZState)state{
     NSString *stateString;
     switch (state) {
-        case WZStateIdle:
+        case WOWZStateIdle:
             stateString = @"idle";
             self.onBroadcastStop(@{@"event":@{@"host":self.hostAddress, @"broadcastName":self.broadcastName, @"status": @"stopped"}});
             break;
-        case WZStateRunning:
+        case WOWZStateRunning:
             stateString = @"running";
             break;
-        case WZStateStarting:
+        case WOWZStateStarting:
             stateString = @"starting";
             break;
-        case WZStateStopping:
+        case WOWZStateStopping:
             stateString = @"stopping";
             break;
         default:
@@ -182,7 +182,7 @@
     }
     
 }
--(void)broadcastDidReceiveEvent:(WZEvent)event andError:(NSError *)error{
+-(void)broadcastDidReceiveEvent:(WOWZEvent)event andError:(NSError *)error{
     if(error){
         self.onBroadcastErrorReceive(@{@"error":error.localizedDescription});
     }
