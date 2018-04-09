@@ -59,3 +59,6 @@ node_modules/
 # Wowza private SDKs
 example/ios/wowzagocoder_static_lib
 example/ios/WowzaGoCoderSDK.framework
+
+# MacOS files
+.DS_Store

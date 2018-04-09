@@ -11,11 +11,11 @@
 
 
 NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
-@interface WMBroadcastView()<WZStatusCallback, WZVideoSink, WZAudioSink, WZVideoEncoderSink, WZAudioEncoderSink>
+@interface WMBroadcastView()<WOWZStatusCallback, WOWZVideoSink, WOWZAudioSink, WOWZVideoEncoderSink, WOWZAudioEncoderSink>
 
 
 @property (nonatomic, strong) WowzaGoCoder *goCoder;
-@property (nonatomic, strong) WZCameraPreview *goCoderCameraPreview;
+@property (nonatomic, strong) WOWZCameraPreview *goCoderCameraPreview;
 @property (nonatomic, strong) UIView *broadcastView;
 @property (nonatomic, strong) WowzaConfig *wozwaConfig;
 @property (nonatomic, strong) NSMutableArray    *receivedGoCoderEventCodes;
@@ -66,7 +66,7 @@ NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
     
     // Start the camera preview
     self.goCoderCameraPreview = self.goCoder.cameraPreview;
-    self.goCoderCameraPreview.previewGravity = WZCameraPreviewGravityResizeAspectFill;
+    self.goCoderCameraPreview.previewGravity = WOWZCameraPreviewGravityResizeAspectFill;
     [self.goCoderCameraPreview startPreview];
     
 }
@@ -94,7 +94,7 @@ NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
 
 }
 -(void)stopBroadcasting{
-    if (self.goCoder.status.state == WZStateRunning) {
+    if (self.goCoder.status.state == WOWZStateRunning) {
         [self.goCoder endStreaming:self];
         [UIApplication sharedApplication].idleTimerDisabled = NO;
     }
@@ -112,7 +112,7 @@ NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
     self.goCoder.config.streamName = name;
 }
 -(NSUInteger)invertCamera{
-    WZCamera *otherCamera = [self.goCoderCameraPreview otherCamera];
+    WOWZCamera *otherCamera = [self.goCoderCameraPreview otherCamera];
     if (![otherCamera supportsWidth:self.wozwaConfig.videoWidth]) {
         [self.wozwaConfig loadPreset:otherCamera.supportedPresetConfigs.lastObject.toPreset];
         self.goCoder.config = self.wozwaConfig;
@@ -141,14 +141,14 @@ NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
     [self.goCoder unregisterVideoEncoderSink:self];
 }
 #pragma mark - WZStatusCallback Protocol Instance Methods
-- (void) onWZStatus:(WZStatus *) goCoderStatus {
+- (void) onWOWZStatus:(WOWZStatus *) goCoderStatus {
     NSLog(@"status %@", goCoderStatus);
     // A successful status transition has been reported by the GoCoder SDK
     [self.delegate broadcastStatusDidChange:goCoderStatus.state];
     
 }
 
-- (void) onWZEvent:(WZStatus *) goCoderStatus {
+- (void) onWOWZEvent:(WOWZStatus *) goCoderStatus {
     // If an event is reported by the GoCoder SDK, display an alert dialog describing the event,
     // but only if we haven't already shown an alert for this event
     NSLog(@"event status %@", goCoderStatus);
@@ -172,7 +172,7 @@ NSString * const BlackAndWhiteKey = @"BlackAndWhiteKey";
     });
 }
 
-- (void) onWZError:(WZStatus *) goCoderStatus {
+- (void) onWOWZError:(WOWZStatus *) goCoderStatus {
     // If an error is reported by the GoCoder SDK, display an alert dialog containing the error details
     
     [self.delegate broadcastDidReceiveError:goCoderStatus.error];

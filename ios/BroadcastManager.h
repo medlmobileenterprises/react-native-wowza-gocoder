@@ -29,6 +29,8 @@ static NSString *didStopBroadcast                 = @"onBroadcastStop";
                                                password:(NSString *)password
                                          backgroundMode:(BOOL)backgroundMode
                                              sizePreset:(NSInteger)sizePreset
+                                       videoOrientation:(NSString *)videoOrientation
+                                            frontCamera:(BOOL)frontCamera
                                        andBroadcastView:(UIView *)view;
 +(void)startBroadcast:(WMBroadcastView *) broadcast;
 +(void)stopBroadcast:(WMBroadcastView *) broadcast;

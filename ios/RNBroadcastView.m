@@ -37,6 +37,7 @@
 @property (nonatomic, assign) NSNumber *port;
 @property (nonatomic, strong) NSString *applicationName;
 @property (nonatomic, strong) NSString *broadcastName;
+@property (nonatomic, strong) NSString *videoOrientation;
 @property (nonatomic, assign) BOOL backgroundMode;
 @property (nonatomic, assign) NSInteger sizePreset;
 @property (nonatomic, strong) NSString *username;
@@ -100,6 +101,8 @@
                                                                   password:self.password
                                                             backgroundMode:self.backgroundMode
                                                                 sizePreset:self.sizePreset
+                                                          videoOrientation:self.videoOrientation
+                                                               frontCamera:self.frontCamera
                                                           andBroadcastView:self];
         self.broadcast.delegate = self;
     }
@@ -158,20 +161,20 @@
     //show error
     self.onBroadcastFail(@{@"error":error.localizedDescription});
 }
--(void)broadcastStatusDidChange:(WZState)state{
+-(void)broadcastStatusDidChange:(WOWZState)state{
     NSString *stateString;
     switch (state) {
-        case WZStateIdle:
+        case WOWZStateIdle:
             stateString = @"idle";
             self.onBroadcastStop(@{@"event":@{@"host":self.hostAddress, @"broadcastName":self.broadcastName, @"status": @"stopped"}});
             break;
-        case WZStateRunning:
+        case WOWZStateRunning:
             stateString = @"running";
             break;
-        case WZStateStarting:
+        case WOWZStateStarting:
             stateString = @"starting";
             break;
-        case WZStateStopping:
+        case WOWZStateStopping:
             stateString = @"stopping";
             break;
         default:
@@ -179,7 +182,7 @@
     }
     
 }
--(void)broadcastDidReceiveEvent:(WZEvent)event andError:(NSError *)error{
+-(void)broadcastDidReceiveEvent:(WOWZEvent)event andError:(NSError *)error{
     if(error){
         self.onBroadcastErrorReceive(@{@"error":error.localizedDescription});
     }
