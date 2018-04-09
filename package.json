@@ -19,7 +19,7 @@
   "license": "MIT",
   "main": "BroadcastView.js",
   "name": "react-native-wowza-gocoder",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "contributors": [
     {
       "name": "Hugo Nagano",
