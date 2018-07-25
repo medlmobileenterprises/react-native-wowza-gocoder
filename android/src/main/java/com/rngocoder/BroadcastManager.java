@@ -2,8 +2,10 @@ package com.rngocoder;
 
 import android.content.Context;
 import com.wowza.gocoder.sdk.api.WowzaGoCoder;
+import com.wowza.gocoder.sdk.api.broadcast.WZBroadcast;
+import com.wowza.gocoder.sdk.api.broadcast.WZBroadcastConfig;
 import com.wowza.gocoder.sdk.api.configuration.WZMediaConfig;
-import com.wowza.gocoder.sdk.api.configuration.WowzaConfig;
+import com.wowza.gocoder.sdk.api.devices.WZAudioDevice;
 import com.wowza.gocoder.sdk.api.devices.WZCameraView;
 import com.wowza.gocoder.sdk.api.errors.WZStreamingError;
 import com.wowza.gocoder.sdk.api.logging.WZLog;
@@ -13,65 +15,61 @@ import com.wowza.gocoder.sdk.api.status.WZStatusCallback;
 
 
 public class BroadcastManager {
-    public static WowzaGoCoder initBroadcast(Context localContext, String hostAddress, String applicationName, String broadcastName, String sdkLicenseKey, String username, String password,int sizePreset,WZCameraView cameraView){
-        WowzaGoCoder mGoCoder = WowzaGoCoder.init(localContext, sdkLicenseKey);
-        WowzaConfig broadcastConfig = new WowzaConfig();
-        // Update the active config to the defaults for 720p video
-
-        broadcastConfig.setAudioBitRate(22400);
+    public static WZBroadcastConfig initBroadcast(Context localContext, String hostAddress, String applicationName, String broadcastName, String sdkLicenseKey, String username, String password,int sizePreset, String videoOrientation, WZCameraView cameraView, WZAudioDevice audioDevice){
+        WowzaGoCoder.init(localContext, sdkLicenseKey);
+        WZBroadcastConfig broadcastConfig = new WZBroadcastConfig();
+        broadcastConfig.setOrientationBehavior(getOrientationBehavior(videoOrientation));
         broadcastConfig.setVideoFramerate(12);
-        broadcastConfig.set(getSizePresetWithInt(sizePreset));
 
-        // Set the address for the Wowza Streaming Engine server or Wowza Cloud
+        WZMediaConfig mediaConfig = getSizePresetWithInt(sizePreset);
+        broadcastConfig.setVideoSourceConfig(mediaConfig);
+
+        broadcastConfig.setVideoBroadcaster(cameraView);
+        broadcastConfig.setAudioBroadcaster(audioDevice);
+        broadcastConfig.setAudioBitRate(22400);
+
         broadcastConfig.setHostAddress(hostAddress);
         broadcastConfig.setUsername(username);
         broadcastConfig.setPassword(password);
         broadcastConfig.setApplicationName(applicationName);
-        // Set the name of the stream
         broadcastConfig.setStreamName(broadcastName);
 
-        // Update the active config
-        mGoCoder.setConfig(broadcastConfig);
-        mGoCoder.setCameraView(cameraView);
-        return mGoCoder;
-
+        return broadcastConfig;
     }
-    public static void startBroadcast(WowzaGoCoder mGoCoder, WZStatusCallback callback){
-        if (!mGoCoder.isStreaming()) {
+
+    public static void startBroadcast(WZBroadcast broadcast, WZBroadcastConfig broadcastConfig, WZStatusCallback callback) {
+        if (!broadcast.getStatus().isRunning()) {
             // Validate the current broadcast config
-            WZStreamingError configValidationError = mGoCoder.getConfig().validateForBroadcast();
+            WZStreamingError configValidationError = broadcastConfig.validateForBroadcast();
             if (configValidationError != null) {
                 WZLog.error(configValidationError);
             } else {
                 // Start the live stream
-                mGoCoder.startStreaming(callback);
+                broadcast.startBroadcast(broadcastConfig, callback);
             }
         }
     }
-    public static void stopBroadcast(WowzaGoCoder mGoCoder, WZStatusCallback callback){
-        if (mGoCoder.isStreaming()) {
-            // Stop the live strea
-            mGoCoder.endStreaming(callback);
+    public static void stopBroadcast(WZBroadcast broadcast, WZStatusCallback callback){
+        if (broadcast.getStatus().isRunning()) {
+            // Stop the live stream
+            broadcast.endBroadcast(callback);
         }
     }
-    public static void invertCamera(WowzaGoCoder mGoCoder){
-        mGoCoder.getCameraView().switchCamera();
+    public static void invertCamera(WZCameraView cameraView) {
+        cameraView.switchCamera();
     }
-    public static void turnFlash(WowzaGoCoder mGoCoder, boolean on){
-        mGoCoder.getCameraView().getCamera().setTorchOn(on);
+
+    public static void turnFlash(WZCameraView cameraView, boolean on) {
+        cameraView.getCamera().setTorchOn(on);
+
     }
-    public static void mute(WowzaGoCoder mGoCoder, boolean muted){
-        if(!muted) {
-            mGoCoder.muteAudio();
-        }
-        else{
-            mGoCoder.unmuteAudio();
-        }
+
+    public static void mute(WZAudioDevice audioDevice, boolean muted){
+        audioDevice.setMuted(muted);
     }
-    public static void changeStreamName(WowzaGoCoder mGoCoder, String broadcastName){
-        WowzaConfig broadcastConfig = mGoCoder.getConfig();
+
+    public static void changeStreamName(WZBroadcastConfig broadcastConfig, String broadcastName){
         broadcastConfig.setStreamName(broadcastName);
-        mGoCoder.setConfig(broadcastConfig);
     }
 
     private static WZMediaConfig getSizePresetWithInt(int sizePreset){
@@ -96,6 +94,17 @@ public class BroadcastManager {
                 return  WZMediaConfig.FRAME_SIZE_3840x2160;
             default:
                 return WZMediaConfig.FRAME_SIZE_640x480;
+        }
+    }
+
+    private static int getOrientationBehavior(String orientation) {
+        switch (orientation) {
+            case "landscape":
+                return WZMediaConfig.ALWAYS_LANDSCAPE;
+            case "portrait":
+                return WZMediaConfig.ALWAYS_PORTRAIT;
+            default:
+                return WZMediaConfig.SAME_AS_SOURCE;
         }
     }
 }

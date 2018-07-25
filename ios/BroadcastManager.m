@@ -44,6 +44,8 @@ static BroadcastManager *sharedMyManager = nil;
                                                password:(NSString *)password
                                          backgroundMode:(BOOL)backgroundMode
                                              sizePreset:(NSInteger)sizePreset
+                                       videoOrientation:(NSString *)videoOrientation
+                                            frontCamera:(BOOL)frontCamera
                                        andBroadcastView:(UIView *)view
 {
     
@@ -56,10 +58,14 @@ static BroadcastManager *sharedMyManager = nil;
     }
     config.applicationName = applicationName;
     config.streamName = broadcastName;
-    config.broadcastScaleMode = WZBroadcastScaleModeAspectFill;
+    config.broadcastScaleMode = WOWZBroadcastScaleModeAspectFill;
     config.backgroundBroadcastEnabled = backgroundMode;
     config.username = username;
     config.password = password;
+    config.broadcastVideoOrientation = [BroadcastManager getBroadcastOrientation:videoOrientation];
+    if (videoOrientation) {
+        config.capturedVideoRotates = NO;
+    }
     
     NSLog(@"user %@", username);
     NSLog(@"Password %@", password);
@@ -67,6 +73,11 @@ static BroadcastManager *sharedMyManager = nil;
     WMBroadcastView *broadcast = [[WMBroadcastView alloc] initWithLicenseKey:sdkLicence andStreamConfig:config];
     
     [broadcast initializeBroadcastView:view];
+    
+    if (frontCamera) {
+        [self invertCamera:broadcast];
+    }
+    
     return broadcast;
 }
 +(void)startBroadcast:(WMBroadcastView *) broadcast{
@@ -96,6 +107,16 @@ static BroadcastManager *sharedMyManager = nil;
 }
 +(void)changeStreamName:(NSString *)name andBroadcastView:(WMBroadcastView *)broadcast {
     [broadcast setStreamName:name];
+}
+
++(WOWZBroadcastOrientation)getBroadcastOrientation:(NSString *)orientationString {
+    if ([orientationString isEqualToString:@"landscape"]) {
+        return WOWZBroadcastOrientationAlwaysLandscape;
+    } else if ([orientationString isEqualToString:@"portrait"]) {
+        return WOWZBroadcastOrientationAlwaysPortrait;
+    }
+    
+    return WOWZBroadcastOrientationSameAsDevice;
 }
 
 @end
