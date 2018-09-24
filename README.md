@@ -2,10 +2,11 @@
 # react-native-wowza-gocoder
 ![Platform](https://img.shields.io/badge/platform-react--native%20%5Bios%20%26%20android%5D-blue.svg)
 ![License](https://img.shields.io/npm/l/express.svg)
-![Release](https://img.shields.io/badge/version-1.0.5-lightgrey.svg)
+![Release](https://img.shields.io/badge/version-1.0.6-lightgray.svg)
 
 ## About
-This is a Native Module for React Native that allows integration of Wowza's GoCoder SDK in less time.  It has been battle tested on our internal and client projects.  !Note* we require RN 0.42+ for this to work!  
+This is a Native Module for React Native that allows integration of Wowza's GoCoder SDK in less time.
+!Note* we require RN 0.42+ and GoCoderSDK 1.5.+ for this to work!
 
 ## Getting started
 
@@ -194,5 +195,6 @@ react-native-link
 ## TODOS
 
 - [ ] Add better support for the size preset props for both platforms
-- [ ] Add a config for the different keys provided per platform
-- [ ] Create a sample project for Android
+- [ ] Add support for Playback feature
+
+
